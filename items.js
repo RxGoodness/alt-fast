@@ -5,3 +5,4 @@ let items = [
     {id : '4', name: 'Fourth item'},
     {id : '5', name: 'Fifth item'}
 ]
+module.exports = items
