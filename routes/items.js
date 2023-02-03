@@ -9,7 +9,7 @@ const Item = {
             id: {type: 'integer'},
             name: {type: 'string'}
         // }
-    }
+    },
 }
 
 const getItemsOpts = {
@@ -21,7 +21,10 @@ const getItemsOpts = {
                 items: Item
             }
         }
-    }
+    },
+    handler: function (req, reply) {
+        reply.send(items)
+    } 
 }
 
 const getItemOpts = {
@@ -29,20 +32,25 @@ const getItemOpts = {
         response: {
             200: Item
         }
+    },
+    handler: (req,reply) =>{
+        const {id} = req.params
+        const item = items.find((item)=>item.id === id)
+        reply.send(item)
     }
 }
 
 
 function itemRoutes(fastify, options, done) {
-    fastify.get('/items',getItemsOpts, (req,reply) =>{
-        reply.send( items)
-    })
+    fastify.get('/items',getItemsOpts, 
+    // (req,reply) =>{
+    //     reply.send( items)
+    // }
+    )
     
-    fastify.get('/items/:id', getItemOpts, (req,reply) =>{
-        const {id} = req.params
-        const item = items.find((item)=>item.id === id)
-        reply.send(item)
-    })
+    fastify.get('/items/:id', getItemOpts, 
+    
+    )
 
     done()
 }
