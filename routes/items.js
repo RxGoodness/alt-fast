@@ -1,4 +1,5 @@
-const items = require('../items')
+const {getItems, getItem} = require('../controllers/items')
+// const items = require('../items')
 
 const Item = {
     // type: 'object',
@@ -22,9 +23,7 @@ const getItemsOpts = {
             }
         }
     },
-    handler: function (req, reply) {
-        reply.send(items)
-    } 
+    handler: getItems
 }
 
 const getItemOpts = {
@@ -33,11 +32,7 @@ const getItemOpts = {
             200: Item
         }
     },
-    handler: (req,reply) =>{
-        const {id} = req.params
-        const item = items.find((item)=>item.id === id)
-        reply.send(item)
-    }
+    handler: getItem
 }
 
 
